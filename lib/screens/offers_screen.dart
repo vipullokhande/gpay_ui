@@ -115,12 +115,16 @@ class _OffersScreenState extends State<OffersScreen> {
                   title: title,
                   subtitle: subtitle,
                   onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
                         builder: (context) => InstantOfferScreen(
-                            text: asset,
-                            title: title,
-                            subtitle: subtitle,
-                            onTap: () {})));
+                          text: asset,
+                          title: title,
+                          subtitle: subtitle,
+                          onTap: () {},
+                        ),
+                      ),
+                    );
                   },
                 );
               },
