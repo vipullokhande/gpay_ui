@@ -11,7 +11,7 @@ class UserProfileDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-        bool isDark = context.watch<DarkModeController>().isDark;
+    bool isDark = context.watch<DarkModeController>().isDark;
 
     final size = MediaQuery.of(context).size;
     return Scaffold(
