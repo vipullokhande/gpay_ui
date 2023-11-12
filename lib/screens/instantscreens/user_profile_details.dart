@@ -69,7 +69,7 @@ class UserProfileDetails extends StatelessWidget {
                       onPressed: () {},
                       icon: const Icon(
                         Icons.mode_edit_outline_rounded,
-                        color: Colors.black,
+                        color: Colors.white,
                       ),
                     ),
                   ),

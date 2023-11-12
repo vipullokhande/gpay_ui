@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gpay_ui/controllers/dark_mode_controller.dart';
+import 'package:gpay_ui/controllers/user_data_controller.dart';
 import 'package:gpay_ui/screens/home_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => DarkModeController(),
+    MultiProvider(
+      providers: [
+        Provider<DarkModeController>(create: (context) => DarkModeController()),
+        Provider<UserDataController>(create: (context) => UserDataController()),
+      ],
       child: const MyApp(),
     ),
   );

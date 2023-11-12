@@ -21,14 +21,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     bool isDark = context.watch<DarkModeController>().isDark;
-
     var size = MediaQuery.of(context).size;
     return ResponsiveBuilder(builder: (context, sizeInfo) {
       var heightt = sizeInfo.deviceScreenType == DeviceScreenType.mobile
           ? size.height * 0.23
           : size.height * 0.33;
       var botPadding = sizeInfo.deviceScreenType == DeviceScreenType.mobile
-          ? const EdgeInsets.only(bottom: 130)
+          ? EdgeInsets.only(bottom: size.height * 0.13)
           : const EdgeInsets.only(bottom: 0);
       var topHeight = sizeInfo.deviceScreenType == DeviceScreenType.mobile
           ? size.height * 0.29
@@ -221,14 +220,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         horizontal: 20,
                         vertical: 3,
                       ),
-                      leading: Expanded(
-                        child: Text(
-                          'Set up payment methods 1/2',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500,
-                            color: isDark ? Colors.white : Colors.black,
-                          ),
+                      leading: Text(
+                        'Set up payment methods 1/2',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                          color: isDark ? Colors.white : Colors.black,
                         ),
                       ),
                       trailing: const Icon(
@@ -334,19 +331,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
             ),
-            Padding(
-              padding: botPadding,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  ListTile(
-                    onTap: () {},
-                    leading: const Icon(
-                      Icons.card_giftcard_rounded,
-                      color: Colors.blue,
-                    ),
-                    title: Expanded(
-                      child: Column(
+            Align(
+              alignment: Alignment.bottomCenter,
+              // bottom: size.height * 0.12,
+              child: Padding(
+                padding: botPadding,
+                child: Column(
+                  // mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    ListTile(
+                      onTap: () {},
+                      leading: const Icon(
+                        Icons.card_giftcard_rounded,
+                        color: Colors.blue,
+                      ),
+                      title: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
@@ -370,47 +370,47 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                         ],
                       ),
+                      trailing: TextButton(
+                        onPressed: () {},
+                        child: const Text('Share'),
+                      ),
                     ),
-                    trailing: TextButton(
-                      onPressed: () {},
-                      child: const Text('Share'),
-                    ),
-                  ),
-                  ListTile(
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const SettingsScreen(),
+                    ListTile(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const SettingsScreen(),
+                          ),
+                        );
+                      },
+                      leading: const Icon(
+                        Icons.settings,
+                        color: Colors.blue,
+                      ),
+                      title: Text(
+                        'Settings',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          color: isDark ? Colors.white : Colors.black,
                         ),
-                      );
-                    },
-                    leading: const Icon(
-                      Icons.settings,
-                      color: Colors.blue,
-                    ),
-                    title: Text(
-                      'Settings',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        color: isDark ? Colors.white : Colors.black,
                       ),
                     ),
-                  ),
-                  ListTile(
-                    onTap: () {},
-                    leading: const Icon(
-                      Icons.help_outline_rounded,
-                      color: Colors.blue,
-                    ),
-                    title: Text(
-                      'Get help',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        color: isDark ? Colors.white : Colors.black,
+                    ListTile(
+                      onTap: () {},
+                      leading: const Icon(
+                        Icons.help_outline_rounded,
+                        color: Colors.blue,
+                      ),
+                      title: Text(
+                        'Get help',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          color: isDark ? Colors.white : Colors.black,
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ],

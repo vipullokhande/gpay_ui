@@ -326,58 +326,64 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
-          InkWell(
-            borderRadius: BorderRadius.circular(10),
-            splashColor: Colors.purple,
-            onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (_) => const Scaffold(
-                    body: SizedBox(
-                      height: double.maxFinite,
-                      width: double.maxFinite,
-                      child: Icon(Icons.facebook),
-                    ),
-                  ),
-                ),
-              );
-            },
-            child: Ink(
-              height: 120,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: isDark
-                    ? const Color.fromARGB(255, 48, 47, 47)
-                    : const Color.fromARGB(255, 235, 234, 234),
-              ),
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 3),
-              child: Row(
-                children: [
-                  ClipOval(
-                    child: Image.asset(
-                      'assets/maha.png',
-                      isAntiAlias: true,
-                      width: 60,
-                      height: 60,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 7,
-                  ),
-                  Expanded(
-                    child: Text(
-                      'Mahavitaran - \nMaharashtra Electricity',
-                      style: TextStyle(
-                        color: isDark ? Colors.white : Colors.black,
-                        fontSize: 16,
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 10,
+            ),
+            child: InkWell(
+              borderRadius: BorderRadius.circular(10),
+              splashColor: Colors.purple,
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => const Scaffold(
+                      body: SizedBox(
+                        height: double.maxFinite,
+                        width: double.maxFinite,
+                        child: Icon(Icons.facebook),
                       ),
                     ),
                   ),
-                  Icon(
-                    Icons.arrow_forward_ios_rounded,
-                    color: isDark ? Colors.white : Colors.black,
-                  ),
-                ],
+                );
+              },
+              child: Ink(
+                height: 100,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: isDark
+                      ? const Color.fromARGB(255, 48, 47, 47)
+                      : const Color.fromARGB(255, 235, 234, 234),
+                ),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 3),
+                child: Row(
+                  children: [
+                    ClipOval(
+                      child: Image.asset(
+                        'assets/maha.png',
+                        isAntiAlias: true,
+                        width: 60,
+                        height: 60,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 7,
+                    ),
+                    Expanded(
+                      child: Text(
+                        'Mahavitaran - \nMaharashtra Electricity',
+                        style: TextStyle(
+                          color: isDark ? Colors.white : Colors.black,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                    Icon(
+                      Icons.arrow_forward_ios_rounded,
+                      color: isDark ? Colors.white : Colors.black,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
