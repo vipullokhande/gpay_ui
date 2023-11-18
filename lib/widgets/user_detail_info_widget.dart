@@ -52,7 +52,7 @@ class UserDetailInfoWidget extends StatelessWidget {
       trailing: Text(
         trailText,
         style: const TextStyle(
-          fontSize: 20,
+          fontSize: 16,
           fontWeight: FontWeight.w500,
           color: Colors.blue,
         ),

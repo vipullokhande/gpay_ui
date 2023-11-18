@@ -35,7 +35,7 @@ class GChip extends StatelessWidget {
           ),
         ),
         backgroundColor: isDark
-            ? const Color.fromARGB(255, 96, 96, 96)
+            ? const Color.fromARGB(255, 53, 53, 53)
             : const Color.fromARGB(255, 235, 234, 234),
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(

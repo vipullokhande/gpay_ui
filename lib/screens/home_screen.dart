@@ -58,13 +58,14 @@ class _HomeScreenState extends State<HomeScreen> {
     String upiID = 'xnmae1@okhdfcbank';
     Color expTileColor = isDark ? Colors.white : Colors.black;
     return Scaffold(
-      backgroundColor: isDark ? Colors.black : Colors.white,
+      backgroundColor:
+          isDark ? const Color.fromARGB(255, 24, 24, 24) : Colors.white,
       body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 3),
         scrollDirection: Axis.vertical,
         children: <Widget>[
           Container(
-            height: size.height * 0.1,
+            height: size.height * 0.12,
             width: size.width,
             alignment: Alignment.center,
             margin: const EdgeInsets.symmetric(
@@ -74,29 +75,33 @@ class _HomeScreenState extends State<HomeScreen> {
               color: isDark ? Colors.black : Colors.white38,
               image: const DecorationImage(
                 image: NetworkImage(
-                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxl-ddjYk5x_tSNGQ7fjWBw3h9HMEogxXK_w&usqp=CAU",
+                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVOIYQrX9h0FA7v7Kl1F-7UujQcl-ZElDoNg&usqp=CAU",
                 ),
                 fit: BoxFit.cover,
                 isAntiAlias: true,
               ),
             ),
             child: ListTile(
-              title: TextFormField(
-                enabled: false,
-                textAlign: TextAlign.start,
-                decoration: InputDecoration(
-                  fillColor: isDark ? Colors.black : Colors.white,
-                  filled: true,
-                  hintText: 'Pay friends and merchants',
-                  prefixIcon: Icon(
-                    Icons.search,
-                    color: isDark ? Colors.white : Colors.black,
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                    borderSide: BorderSide(
-                      width: 1,
-                      color: isDark ? Colors.black : Colors.grey,
+              titleAlignment: ListTileTitleAlignment.center,
+              title: SizedBox(
+                height: 50,
+                child: TextFormField(
+                  enabled: false,
+                  textAlign: TextAlign.start,
+                  decoration: InputDecoration(
+                    fillColor: isDark ? Colors.black : Colors.white,
+                    filled: true,
+                    hintText: 'Pay friends and merchants',
+                    prefixIcon: Icon(
+                      Icons.search,
+                      color: isDark ? Colors.white : Colors.black,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                      borderSide: BorderSide(
+                        width: 1,
+                        color: isDark ? Colors.black : Colors.grey,
+                      ),
                     ),
                   ),
                 ),
@@ -190,21 +195,66 @@ class _HomeScreenState extends State<HomeScreen> {
           Container(
             height: 60,
             alignment: Alignment.center,
-            child: TextButton.icon(
-              style: TextButton.styleFrom(
-                backgroundColor: isDark ? Colors.black : Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                  side: const BorderSide(
-                    width: 1,
-                    color: Colors.grey,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                TextButton.icon(
+                  style: TextButton.styleFrom(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 3, horizontal: 10),
+                    backgroundColor: isDark
+                        ? const Color.fromARGB(255, 36, 36, 36)
+                        : const Color.fromARGB(255, 235, 235, 235),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      side: BorderSide.none,
+                    ),
+                    // fixedSize: Size(size.width * 0.3, 30),
+                  ),
+                  onPressed: () {},
+                  label: Icon(
+                    Icons.add_circle_outline,
+                    color: isDark ? Colors.white : Colors.black,
+                    size: 22,
+                  ),
+                  icon: Text(
+                    'Activate UPI Lite',
+                    style: TextStyle(
+                      fontSize: 10,
+                      color: isDark ? Colors.white : Colors.black,
+                    ),
                   ),
                 ),
-                fixedSize: Size(size.width - 80, 40),
-              ),
-              onPressed: () {},
-              icon: const Icon(Icons.copy),
-              label: Text('UPI ID : $upiID'),
+                TextButton.icon(
+                  style: TextButton.styleFrom(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 3, horizontal: 10),
+                    backgroundColor: isDark
+                        ? const Color.fromARGB(255, 59, 59, 59)
+                        : Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      side: BorderSide(
+                        color: isDark ? Colors.white38 : Colors.grey,
+                      ),
+                    ),
+                    // fixedSize: Size(size.width * 0.45, 30),
+                  ),
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.copy,
+                    color: isDark ? Colors.white : Colors.black,
+                    size: 20,
+                  ),
+                  label: Text(
+                    'UPI ID : $upiID ',
+                    style: TextStyle(
+                      color: isDark ? Colors.white : Colors.black,
+                      fontSize: 11,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
           Padding(
@@ -249,7 +299,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   style: TextButton.styleFrom(
                     backgroundColor: const Color.fromARGB(255, 170, 213, 249),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
+                      borderRadius: BorderRadius.circular(20),
                     ),
                   ),
                   onPressed: () {},
@@ -291,14 +341,14 @@ class _HomeScreenState extends State<HomeScreen> {
                             ? Image.network(
                                 image,
                                 isAntiAlias: true,
-                                height: 60,
-                                width: 60,
+                                height: 55,
+                                width: 55,
                               )
                             : Image.asset(
                                 image,
                                 isAntiAlias: true,
-                                height: 60,
-                                width: 60,
+                                height: 55,
+                                width: 55,
                               ),
                       ),
                       const SizedBox(
@@ -319,7 +369,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: Text(
-              "Bill recharges and more",
+              "Bill & Recharges",
               style: TextStyle(
                 fontSize: 20,
                 color: isDark ? Colors.white : Colors.black87,
@@ -457,11 +507,11 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(
-                12,
+                24,
               ),
-              side: const BorderSide(
+              side: BorderSide(
                 width: 1,
-                color: Colors.blueAccent,
+                color: Colors.blueAccent.shade200,
               ),
             ),
           ),
@@ -557,17 +607,25 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Promotions',
-                  style: TextStyle(
-                    color: isDark ? Colors.white : Colors.black,
-                    fontSize: 22,
-                    fontWeight: FontWeight.w400,
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 3,
+                    vertical: 5,
+                  ),
+                  child: Text(
+                    'Promotions',
+                    style: TextStyle(
+                      color: isDark ? Colors.white : Colors.black,
+                      fontSize: 22,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 6)
+                      .copyWith(top: 7),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       DropWidget(
                         image: 'assets/rewards.png',
@@ -634,6 +692,25 @@ class _HomeScreenState extends State<HomeScreen> {
                       onTap: () {},
                     ),
                   ],
+                ),
+                ListTile(
+                  onTap: () {},
+                  leading: const Icon(
+                    Icons.speed,
+                    color: Colors.blue,
+                  ),
+                  title: Text(
+                    'Check your CIBIL score for \nfree',
+                    maxLines: 2,
+                    style: TextStyle(
+                      color: isDark ? Colors.white : Colors.black87,
+                      fontSize: 18,
+                    ),
+                  ),
+                  trailing: Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    color: isDark ? Colors.white : Colors.black,
+                  ),
                 ),
                 ListTile(
                   onTap: () {

@@ -159,7 +159,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         style: TextButton.styleFrom(
                                           fixedSize:
                                               Size(size.width * 0.34, 40),
-                                          backgroundColor: Colors.blue.shade900,
+                                          backgroundColor: Colors.blue.shade800,
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(24),
@@ -243,7 +243,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                           ),
                           const SizedBox(
-                            height: 10,
+                            height: 15,
                           ),
                         ],
                       ),

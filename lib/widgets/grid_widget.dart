@@ -31,7 +31,7 @@ class GridWidget extends StatelessWidget {
             Icon(
               icon,
               color: isDark ? Colors.white : Colors.black,
-              size: 30,
+              size: 28,
             ),
             const SizedBox(
               height: 7,

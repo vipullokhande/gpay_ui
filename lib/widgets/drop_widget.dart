@@ -30,15 +30,15 @@ class DropWidget extends StatelessWidget {
                   ? Image.network(
                       image,
                       isAntiAlias: true,
-                      height: 60,
-                      width: 60,
+                      height: 55,
+                      width: 55,
                     )
                   : Image.asset(
                       image,
                       isAntiAlias: true,
                       fit: BoxFit.cover,
-                      height: 60,
-                      width: 60,
+                      height: 55,
+                      width: 55,
                     ),
             ),
             const SizedBox(
@@ -49,6 +49,7 @@ class DropWidget extends StatelessWidget {
               maxLines: 1,
               textAlign: TextAlign.center,
               style: TextStyle(
+                fontSize: 13,
                 overflow: TextOverflow.ellipsis,
                 color: isDark ? Colors.white : Colors.black,
               ),

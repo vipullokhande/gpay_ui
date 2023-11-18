@@ -25,7 +25,7 @@ class _RewardWidgetState extends State<RewardWidget> {
   Widget build(BuildContext context) {
     bool isDark = context.watch<DarkModeController>().isDark;
     return InkWell(
-      splashColor: const Color.fromARGB(255, 231, 151, 245),
+      splashColor: const Color.fromARGB(207, 231, 151, 245),
       borderRadius: BorderRadius.circular(20),
       onTap: widget.onTap,
       child: Ink(
@@ -66,9 +66,11 @@ class _RewardWidgetState extends State<RewardWidget> {
                     widget.subtitle,
                     style: TextStyle(
                       overflow: TextOverflow.ellipsis,
-                      color: isDark ? Colors.white : Colors.black,
+                      color: isDark
+                          ? const Color.fromARGB(255, 223, 223, 223)
+                          : Colors.black,
                     ),
-                    maxLines: 3,
+                    maxLines: 2,
                   ),
                 ],
               ),

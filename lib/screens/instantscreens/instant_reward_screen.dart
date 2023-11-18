@@ -101,9 +101,9 @@ class InstantRewardScreen extends StatelessWidget {
                           Text(
                             subtitle,
                             style: const TextStyle(
-                              fontSize: 18,
+                              fontSize: 15,
                               overflow: TextOverflow.ellipsis,
-                              fontWeight: FontWeight.w400,
+                              fontWeight: FontWeight.w500,
                             ),
                             maxLines: 3,
                           ),
@@ -112,7 +112,10 @@ class InstantRewardScreen extends StatelessWidget {
                       Positioned(
                         bottom: 70,
                         child: TextButton.icon(
-                          icon: const Icon(Icons.copy),
+                          icon: const Icon(
+                            Icons.copy,
+                            color: Colors.white,
+                          ),
                           style: TextButton.styleFrom(
                             backgroundColor:
                                 const Color.fromARGB(255, 70, 70, 70),
@@ -151,7 +154,7 @@ class InstantRewardScreen extends StatelessWidget {
           ),
           maxHeight: resmaxHeight,
           minHeight: resminHeight,
-          color: isDark ? Colors.black : Colors.white,
+          color: isDark ? const Color.fromARGB(255, 23, 23, 23) : Colors.white,
           parallaxEnabled: true,
           parallaxOffset: 0.70,
           panelBuilder: (controller) {
@@ -165,7 +168,7 @@ class InstantRewardScreen extends StatelessWidget {
                       horizontal: 18,
                       vertical: 10,
                     ),
-                    leading: Image.asset(text),
+                    leading: ClipOval(child: Image.asset(text)),
                     title: Text(
                       title,
                       style: TextStyle(

@@ -33,10 +33,12 @@ class PaymentOptionsWidget extends StatelessWidget {
                         opacity: 0.7,
                         child: CircleAvatar(
                           radius: 27,
-                          backgroundColor: Colors.blue.shade900,
+                          backgroundColor: isDark
+                              ? Colors.blue.shade900
+                              : Colors.blue.shade200,
                           child: Icon(
                             icon,
-                            color: Colors.white,
+                            color: isDark ? Colors.white : Colors.blue,
                             size: 30,
                           ),
                         ),
@@ -47,7 +49,9 @@ class PaymentOptionsWidget extends StatelessWidget {
                         child: Icon(
                           Icons.add_circle,
                           size: 22,
-                          color: Colors.blue.shade200,
+                          color: isDark
+                              ? Colors.blue.shade200
+                              : Colors.blue.shade700,
                         ),
                       ),
                     ],

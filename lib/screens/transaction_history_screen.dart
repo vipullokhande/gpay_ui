@@ -179,6 +179,7 @@ class TransactionHistoryScreen extends StatelessWidget {
                     style: TextStyle(
                       color: isDark ? Colors.white : Colors.black,
                       fontWeight: FontWeight.w600,
+                      fontSize: 16,
                     ),
                   ),
                 );
