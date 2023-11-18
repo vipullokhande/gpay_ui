@@ -38,14 +38,19 @@ dependencies:
   sliding_up_panel: ^2.0.0+1
 
 dev_dependencies:
+  flutter_launcher_icons: ^0.13.1
   flutter_lints: ^2.0.0
   flutter_native_splash: ^2.3.4
   flutter_test:
     sdk: flutter
 
+flutter_launcher_icons:
+  image_path: "assets/gs.png"
+  android: true
+
 flutter_native_splash:
   color: "#ffffff"
-  image: assets/gpay.png
+  image: assets/gs.png
   android: true
 
 # For information on the generic Dart part of this file, see the
