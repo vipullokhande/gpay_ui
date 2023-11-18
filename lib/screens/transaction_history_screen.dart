@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:gpay_ui/controllers/dark_mode_controller.dart';
+
 // ignore: must_be_immutable
 class TransactionHistoryScreen extends StatelessWidget {
   const TransactionHistoryScreen({
@@ -9,7 +10,7 @@ class TransactionHistoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-        bool isDark = context.watch<DarkModeController>().isDark;
+    bool isDark = context.watch<DarkModeController>().isDark;
 
     final searchController = TextEditingController();
     List<String> titles = [
@@ -78,6 +79,7 @@ class TransactionHistoryScreen extends StatelessWidget {
           ),
           SizedBox(
             height: 60,
+            width: MediaQuery.of(context).size.width * 0.94,
             child: ListTile(
               contentPadding:
                   const EdgeInsets.symmetric(vertical: 2, horizontal: 5),

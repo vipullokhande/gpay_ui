@@ -64,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
         scrollDirection: Axis.vertical,
         children: <Widget>[
           Container(
-            height: 100,
+            height: size.height * 0.1,
             width: size.width,
             alignment: Alignment.center,
             margin: const EdgeInsets.symmetric(
@@ -123,7 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           Container(
-            height: 190,
+            height: size.height * 0.25,
             padding: const EdgeInsets.only(
               top: 10,
             ),
@@ -269,7 +269,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           SizedBox(
-            height: 90,
+            height: size.height * 0.15,
             width: size.width,
             child: ListView.builder(
               itemCount: logos.length,
@@ -388,7 +388,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           Container(
-            height: 280,
+            height: size.height * 0.36,
             padding: const EdgeInsets.symmetric(
               horizontal: 16,
               vertical: 10,
@@ -521,7 +521,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Column(
                   children: [
                     SizedBox(
-                      height: 105,
+                      height: size.height * 0.14,
                       child: Row(
                         children: [
                           DropWidget(
@@ -535,7 +535,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     SizedBox(
-                      height: 105,
+                      height: size.height * 0.14,
                       child: Row(
                         children: [
                           DropWidget(

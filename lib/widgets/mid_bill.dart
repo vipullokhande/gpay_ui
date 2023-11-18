@@ -15,7 +15,7 @@ class MidBillWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool isDark = context.watch<DarkModeController>().isDark;
-
+    var size = MediaQuery.of(context).size;
     return Container(
       margin: const EdgeInsets.symmetric(
         horizontal: 10,
@@ -36,7 +36,7 @@ class MidBillWidget extends StatelessWidget {
         ),
         child: Container(
           height: 105,
-          width: MediaQuery.of(context).size.width * 0.18,
+          width: size.width * 0.14,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
           ),
@@ -51,7 +51,9 @@ class MidBillWidget extends StatelessWidget {
               Text(
                 text,
                 textAlign: TextAlign.center,
+                maxLines: 2,
                 style: TextStyle(
+                  overflow: TextOverflow.ellipsis,
                   letterSpacing: 0.2,
                   color: isDark ? Colors.white : Colors.black,
                 ),

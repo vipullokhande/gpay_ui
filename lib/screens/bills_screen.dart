@@ -3,21 +3,20 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:gpay_ui/controllers/dark_mode_controller.dart';
 import 'package:gpay_ui/widgets/mid_bill.dart';
-class BillsScreen extends StatelessWidget {
 
+class BillsScreen extends StatelessWidget {
   const BillsScreen({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-        bool isDark = context.watch<DarkModeController>().isDark;
+    bool isDark = context.watch<DarkModeController>().isDark;
 
     return Scaffold(
       backgroundColor:
           isDark ? const Color.fromARGB(115, 37, 37, 37) : Colors.white,
       appBar: AppBar(
-        toolbarHeight: 60,
         elevation: 0,
         foregroundColor: isDark ? Colors.white : Colors.black,
         backgroundColor: isDark ? Colors.black : Colors.white,
@@ -29,33 +28,36 @@ class BillsScreen extends StatelessWidget {
             Icons.arrow_back_ios_new_rounded,
           ),
         ),
-        title: TextFormField(
-          style: TextStyle(
-            color: isDark ? Colors.white : Colors.black,
-          ),
-          textAlign: TextAlign.start,
-          keyboardType: TextInputType.text,
-          decoration: InputDecoration(
-            hintText: 'Search billers',
-            hintStyle: TextStyle(
+        title: SizedBox(
+          height: 55,
+          child: TextFormField(
+            style: TextStyle(
               color: isDark ? Colors.white : Colors.black,
             ),
-            prefixIcon: Icon(
-              Icons.search,
-              color: isDark ? Colors.white : Colors.black,
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(20),
-              borderSide: const BorderSide(
-                width: 1,
-                color: Colors.grey,
+            textAlign: TextAlign.justify,
+            keyboardType: TextInputType.text,
+            decoration: InputDecoration(
+              hintText: 'Search billers',
+              hintStyle: TextStyle(
+                color: isDark ? Colors.white : Colors.black,
               ),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(20),
-              borderSide: const BorderSide(
-                width: 1,
-                color: Colors.grey,
+              prefixIcon: Icon(
+                Icons.search,
+                color: isDark ? Colors.white : Colors.black,
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(28),
+                borderSide: const BorderSide(
+                  width: 1,
+                  color: Colors.grey,
+                ),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(28),
+                borderSide: const BorderSide(
+                  width: 1,
+                  color: Colors.grey,
+                ),
               ),
             ),
           ),
