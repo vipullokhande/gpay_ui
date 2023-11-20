@@ -3,16 +3,27 @@ import 'package:provider/provider.dart';
 import 'package:gpay_ui/controllers/dark_mode_controller.dart';
 
 // ignore: must_be_immutable
-class TransactionHistoryScreen extends StatelessWidget {
+class TransactionHistoryScreen extends StatefulWidget {
   const TransactionHistoryScreen({
     Key? key,
   }) : super(key: key);
 
   @override
+  State<TransactionHistoryScreen> createState() =>
+      _TransactionHistoryScreenState();
+}
+
+class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
+  bool isSearch = false;
+  List<String> searchResTitles = [];
+  List<String> searchResAssets = [];
+  List<String> searchResSubtitles = [];
+  List<String> searchResAmounts = [];
+  @override
   Widget build(BuildContext context) {
     bool isDark = context.watch<DarkModeController>().isDark;
-
     final searchController = TextEditingController();
+
     List<String> titles = [
       'Jio Prepaid',
       'Mohan Sweets',
@@ -42,18 +53,30 @@ class TransactionHistoryScreen extends StatelessWidget {
       'assets/mv.png'
     ];
     List<String> subtitles = [
-      '${DateTime.now()}',
-      '${DateTime.now()}',
-      '${DateTime.now()}',
-      '${DateTime.now()}',
-      '${DateTime.now()}',
-      '${DateTime.now()}',
-      '${DateTime.now()}',
-      '${DateTime.now()}',
-      '${DateTime.now()}',
-      '${DateTime.now()}',
-      '${DateTime.now()}',
-      '${DateTime.now()}'
+      // '${DateTime.now()}',
+      // '${DateTime.now()}',
+      // '${DateTime.now()}',
+      // '${DateTime.now()}',
+      // '${DateTime.now()}',
+      // '${DateTime.now()}',
+      // '${DateTime.now()}',
+      // '${DateTime.now()}',
+      // '${DateTime.now()}',
+      // '${DateTime.now()}',
+      // '${DateTime.now()}',
+      // '${DateTime.now()}'
+      '2023-01-23',
+      '2023-01-01',
+      '2023-11-09',
+      '2023-08-12',
+      '2023-01-23',
+      '2023-01-01',
+      '2023-11-09',
+      '2023-08-12',
+      '2023-01-23',
+      '2023-01-01',
+      '2023-11-09',
+      '2023-08-12',
     ];
     List<String> amounts = [
       '- ₹20',
@@ -85,14 +108,32 @@ class TransactionHistoryScreen extends StatelessWidget {
                   const EdgeInsets.symmetric(vertical: 2, horizontal: 5),
               title: TextFormField(
                 controller: searchController,
-                onChanged: (val) {
-                  // if (val.isNotEmpty) {
-                  //   for (var title in titles) {
-                  //     if (title.toLowerCase().contains(val.toLowerCase())) {
-
-                  //     }
-                  //   }
-                  // }
+                // onTap: () {
+                //   setState(() {
+                //     isSearch = true;
+                //   });
+                // },
+                onEditingComplete: () {
+                  setState(() {
+                    // if (searchController.text.isEmpty) {
+                    //   setState(() {
+                    //     isSearch = false;
+                    //   });
+                    // }
+                    for (int i = 0; i < titles.length; i++) {
+                      if (searchResTitles.isEmpty) {
+                        if (titles[i]
+                            .toLowerCase()
+                            .contains(searchController.text.toLowerCase())) {
+                          searchResTitles.add(titles[i]);
+                          searchResAssets.add(assets[i]);
+                          searchResSubtitles.add(subtitles[i]);
+                          searchResAmounts.add(amounts[i]);
+                          isSearch = true;
+                        }
+                      }
+                    }
+                  });
                 },
                 textAlign: TextAlign.start,
                 style: TextStyle(
@@ -105,7 +146,23 @@ class TransactionHistoryScreen extends StatelessWidget {
                   ),
                   prefixIcon: IconButton(
                     onPressed: () {
-                      Navigator.of(context).pop();
+                      if (isSearch) {
+                        if (FocusScope.of(context).hasFocus) {
+                          setState(() {
+                            isSearch = false;
+                          });
+                          FocusScope.of(context).unfocus();
+                        }
+                        searchResAssets.clear();
+                        searchResSubtitles.clear();
+                        searchResAmounts.clear();
+                        searchResSubtitles.clear();
+                        setState(() {
+                          isSearch = false;
+                        });
+                      } else {
+                        Navigator.of(context).pop();
+                      }
                     },
                     icon: Icon(
                       Icons.arrow_back_ios_new_rounded,
@@ -127,9 +184,17 @@ class TransactionHistoryScreen extends StatelessWidget {
                     ),
                   ),
                   suffixIcon: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      if (searchController.text.isNotEmpty) {
+                        setState(() {
+                          searchController.text = '';
+                        });
+                      }
+                    },
                     icon: Icon(
-                      Icons.more_vert_rounded,
+                      searchController.text.isEmpty
+                          ? Icons.more_vert_outlined
+                          : Icons.close,
                       color: isDark ? Colors.white : Colors.black,
                     ),
                   ),
@@ -137,55 +202,108 @@ class TransactionHistoryScreen extends StatelessWidget {
               ),
             ),
           ),
-          Expanded(
-            child: ListView.builder(
-              padding: EdgeInsets.zero,
-              itemCount: titles.length,
-              scrollDirection: Axis.vertical,
-              itemBuilder: (context, index) {
-                final asset = assets[index];
-                final title = titles[index];
-                final subtitle = subtitles[index];
-                final amount = amounts[index];
-                return ListTile(
-                  onTap: () {},
-                  leading: ClipOval(
-                    child: Image.asset(
-                      asset,
-                      width: 50,
-                      height: 50,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  title: Text(
-                    title,
-                    style: TextStyle(
-                      color: isDark ? Colors.white : Colors.black,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  subtitle: Text(
-                    subtitle,
-                    maxLines: 1,
-                    style: TextStyle(
-                      overflow: TextOverflow.ellipsis,
-                      color: isDark
-                          ? const Color.fromARGB(255, 198, 196, 196)
-                          : Colors.black,
-                    ),
-                  ),
-                  trailing: Text(
-                    amount,
-                    style: TextStyle(
-                      color: isDark ? Colors.white : Colors.black,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 16,
-                    ),
-                  ),
-                );
-              },
-            ),
+          const SizedBox(
+            height: 10,
           ),
+          isSearch
+              ? Expanded(
+                  child: ListView.builder(
+                    padding: EdgeInsets.zero,
+                    itemCount: searchResTitles.length,
+                    scrollDirection: Axis.vertical,
+                    itemBuilder: (context, index) {
+                      final asset = searchResAssets[index];
+                      final title = searchResTitles[index];
+                      final subtitle = searchResSubtitles[index];
+                      final amount = searchResAmounts[index];
+                      return ListTile(
+                        onTap: () {},
+                        leading: ClipOval(
+                          child: Image.asset(
+                            asset,
+                            width: 50,
+                            height: 50,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        title: Text(
+                          title,
+                          style: TextStyle(
+                            color: isDark ? Colors.white : Colors.black,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        subtitle: Text(
+                          subtitle,
+                          maxLines: 1,
+                          style: TextStyle(
+                            overflow: TextOverflow.ellipsis,
+                            color: isDark
+                                ? const Color.fromARGB(255, 198, 196, 196)
+                                : Colors.black,
+                          ),
+                        ),
+                        trailing: Text(
+                          amount,
+                          style: TextStyle(
+                            color: isDark ? Colors.white : Colors.black,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                )
+              : Expanded(
+                  child: ListView.builder(
+                    padding: EdgeInsets.zero,
+                    itemCount: titles.length,
+                    scrollDirection: Axis.vertical,
+                    itemBuilder: (context, index) {
+                      final asset = assets[index];
+                      final title = titles[index];
+                      final subtitle = subtitles[index];
+                      final amount = amounts[index];
+                      return ListTile(
+                        onTap: () {},
+                        leading: ClipOval(
+                          child: Image.asset(
+                            asset,
+                            width: 50,
+                            height: 50,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        title: Text(
+                          title,
+                          style: TextStyle(
+                            color: isDark ? Colors.white : Colors.black,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        subtitle: Text(
+                          subtitle,
+                          maxLines: 1,
+                          style: TextStyle(
+                            overflow: TextOverflow.ellipsis,
+                            color: isDark
+                                ? const Color.fromARGB(255, 198, 196, 196)
+                                : Colors.black,
+                          ),
+                        ),
+                        trailing: Text(
+                          amount,
+                          style: TextStyle(
+                            color: isDark ? Colors.white : Colors.black,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
         ],
       ),
     );
