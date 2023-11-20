@@ -629,7 +629,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                       )
-                    : Expanded(
+                    : SizedBox(
                         child: Center(
                           child: Wrap(
                             children: [
