@@ -40,6 +40,7 @@ class GridWidget extends StatelessWidget {
               text,
               textAlign: TextAlign.center,
               style: TextStyle(
+                fontSize: 13.5,
                 color: isDark ? Colors.white : Colors.black,
               ),
             ),

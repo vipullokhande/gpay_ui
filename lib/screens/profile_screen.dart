@@ -159,23 +159,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         style: TextButton.styleFrom(
                                           fixedSize:
                                               Size(size.width * 0.34, 40),
-                                          backgroundColor: Colors.blue.shade800,
+                                          backgroundColor: isDark
+                                              ? Colors.blue.shade200
+                                              : Colors.blue.shade800,
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(24),
                                           ),
                                         ),
                                         onPressed: () {},
-                                        icon: const Icon(
+                                        icon: Icon(
                                           Icons.check_circle,
-                                          color: Colors.white,
+                                          color: isDark
+                                              ? Colors.black
+                                              : Colors.white,
                                           size: 26,
                                         ),
-                                        label: const Text(
+                                        label: Text(
                                           'UPI Number',
                                           style: TextStyle(
-                                            color: Color.fromARGB(
-                                                255, 253, 253, 253),
+                                            color: isDark
+                                                ? Colors.black87
+                                                : const Color.fromARGB(
+                                                    255, 253, 253, 253),
                                             fontSize: 12,
                                           ),
                                         ),

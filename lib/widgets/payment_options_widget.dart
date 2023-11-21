@@ -30,15 +30,15 @@ class PaymentOptionsWidget extends StatelessWidget {
                   child: Stack(
                     children: [
                       Opacity(
-                        opacity: 0.7,
+                        opacity: isDark ? 0.9 : 0.75,
                         child: CircleAvatar(
                           radius: 27,
                           backgroundColor: isDark
                               ? Colors.blue.shade900
-                              : Colors.blue.shade200,
+                              : Colors.blue.shade100,
                           child: Icon(
                             icon,
-                            color: isDark ? Colors.white : Colors.blue,
+                            color: isDark ? Colors.white : Colors.black,
                             size: 30,
                           ),
                         ),
@@ -50,8 +50,8 @@ class PaymentOptionsWidget extends StatelessWidget {
                           Icons.add_circle,
                           size: 22,
                           color: isDark
-                              ? Colors.blue.shade200
-                              : Colors.blue.shade700,
+                              ? Colors.blue.shade100
+                              : Colors.blue.shade800,
                         ),
                       ),
                     ],
@@ -61,7 +61,7 @@ class PaymentOptionsWidget extends StatelessWidget {
                   height: 55,
                   child: Icon(
                     icon,
-                    color: Colors.blue,
+                    color: isDark ? Colors.blue.shade200 : Colors.blue.shade700,
                     size: 38,
                   ),
                 ),

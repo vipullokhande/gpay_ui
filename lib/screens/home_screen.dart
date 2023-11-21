@@ -231,6 +231,12 @@ class _HomeScreenState extends State<HomeScreen> {
   //   '5paisa'
   // ];
   var searchController = TextEditingController();
+  clearAll() {
+    setState(() {
+      searchPersonList.clear();
+      searchBusinessList.clear();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -241,951 +247,1123 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor:
           isDark ? const Color.fromARGB(255, 24, 24, 24) : Colors.white,
-      appBar: AppBar(
-        backgroundColor:
-            isDark ? const Color.fromARGB(255, 24, 24, 24) : Colors.white,
-        toolbarHeight: size.height * 0.07,
-        title: ListTile(
-          // titleAlignment: ListTileTitleAlignment.center,
-          title: SizedBox(
-            height: 50,
-            child: TextFormField(
-              controller: searchController,
-              textAlign: TextAlign.start,
-              style: TextStyle(
-                color: isDark ? Colors.white : Colors.black,
-              ),
-              onChanged: search,
-              decoration: InputDecoration(
-                fillColor: isDark
-                    ? const Color.fromARGB(255, 69, 69, 69)
-                    : Colors.white,
-                filled: true,
-                hintText: 'Pay friends and merchants',
-                hintStyle: TextStyle(
-                  color: isDark ? Colors.white : Colors.black,
+      // appBar: AppBar(
+      //   elevation: 0,
+      //   backgroundColor:
+      //       isDark ? const Color.fromARGB(255, 24, 24, 24) : Colors.white,
+      //   // toolbarHeight: size.height * 0.07,
+      //   title: Padding(
+      //     padding: const EdgeInsets.only(left: 10),
+      //     child: SizedBox(
+      //       height: 50,
+      //       child: TextFormField(
+      //         controller: searchController,
+      //         textAlign: TextAlign.justify,
+      //         style: TextStyle(
+      //           color: isDark ? Colors.white : Colors.black,
+      //         ),
+      //         onChanged: search,
+      //         decoration: InputDecoration(
+      //           fillColor: isDark
+      //               ? const Color.fromARGB(255, 69, 69, 69)
+      //               : Colors.white,
+      //           filled: true,
+      //           hintText: 'Pay friends and merchants',
+      //           hintStyle: TextStyle(
+      //             color: isDark ? Colors.white : Colors.black,
+      //           ),
+      //           prefixIcon: IconButton(
+      //             onPressed: () {
+      //               if (searchPersonList.isNotEmpty ||
+      //                   searchBusinessList.isNotEmpty) {
+      //                 if (searchController.text.isEmpty) {
+      //                   if (FocusScope.of(context).hasFocus) {
+      //                     FocusScope.of(context).unfocus();
+      //                   }
+      //                   setState(() {
+      //                     searchController.text = '';
+      //                     searchPersonList.clear();
+      //                     searchBusinessList.clear();
+      //                   });
+      //                 } else {
+      //                   if (FocusScope.of(context).hasFocus) {
+      //                     FocusScope.of(context).unfocus();
+      //                   }
+      //                   setState(() {
+      //                     searchController.text = '';
+      //                     searchPersonList.clear();
+      //                     searchBusinessList.clear();
+      //                   });
+      //                 }
+      //               } else {
+      //                 Navigator.of(context).pop();
+      //               }
+      //             },
+      //             icon: Icon(
+      //               searchPersonList.isEmpty
+      //                   ? Icons.search
+      //                   : Icons.arrow_back_ios_new_rounded,
+      //               color: isDark ? Colors.white : Colors.black87,
+      //             ),
+      //           ),
+      //           suffixIcon: searchController.text.isEmpty
+      //               ? const SizedBox()
+      //               : IconButton(
+      //                   padding: EdgeInsets.zero,
+      //                   onPressed: () {
+      //                     setState(() {
+      //                       searchPersonList.clear();
+      //                       searchController.text = '';
+      //                     });
+      //                   },
+      //                   icon: Icon(
+      //                     Icons.clear,
+      //                     color: isDark ? Colors.white : Colors.black,
+      //                   ),
+      //                 ),
+      //           enabledBorder: OutlineInputBorder(
+      //             borderRadius: BorderRadius.circular(30),
+      //             borderSide: BorderSide(
+      //               width: 1,
+      //               color: isDark ? Colors.white12 : Colors.grey,
+      //             ),
+      //           ),
+      //           border: OutlineInputBorder(
+      //             borderRadius: BorderRadius.circular(30),
+      //             borderSide: BorderSide(
+      //               width: 1,
+      //               color: isDark ? Colors.white : Colors.grey,
+      //             ),
+      //           ),
+      //         ),
+      //       ),
+      //     ),
+      //   ),
+      //   actions: [
+      //     GestureDetector(
+      //       onTap: () {
+      //         Navigator.of(context).push(
+      //           MaterialPageRoute(
+      //             builder: (context) => ProfileScreen(
+      //               asset: assets,
+      //             ),
+      //           ),
+      //         );
+      //       },
+      //       child: Padding(
+      //         padding: const EdgeInsets.only(right: 25, left: 0),
+      //         child: ClipOval(
+      //           child: Image.asset(
+      //             assets,
+      //             fit: BoxFit.cover,
+      //             height: 50,
+      //             width: 50,
+      //           ),
+      //         ),
+      //       ),
+      //     ),
+      //   ],
+      // ),
+      body: ListView(
+        children: [
+          Container(
+            height: searchPersonList.isNotEmpty || searchBusinessList.isNotEmpty
+                ? size.height * 0.1
+                : size.height * 0.28,
+            width: size.width,
+            alignment: Alignment.topCenter,
+            margin: const EdgeInsets.only(
+              bottom: 8,
+            ),
+            decoration:
+                // searchPersonList.isNotEmpty || searchBusinessList.isNotEmpty
+                //     ? BoxDecoration(
+                //         gradient: LinearGradient(
+                //           colors: isDark
+                //               ? [
+                //                   Colors.black12,
+                //                   Colors.black12,
+                //                 ]
+                //               : [
+                //                   Colors.white24,
+                //                   Colors.white10,
+                //                 ],
+                //         ),
+                //       )
+                //     :
+                BoxDecoration(
+              color: isDark ? Colors.black : Colors.white38,
+              image: const DecorationImage(
+                opacity: 0.9,
+                image: AssetImage(
+                  'assets/event.png',
+                  // "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVOIYQrX9h0FA7v7Kl1F-7UujQcl-ZElDoNg&usqp=CAU",
                 ),
-                prefixIcon: IconButton(
-                  onPressed: () {
-                    if (searchPersonList.isNotEmpty ||
-                        searchBusinessList.isNotEmpty) {
-                      if (searchController.text.isEmpty) {
-                        if (FocusScope.of(context).hasFocus) {
-                          FocusScope.of(context).unfocus();
-                        }
-                        setState(() {
-                          searchController.text = '';
-                          searchPersonList.clear();
-                          searchBusinessList.clear();
-                        });
-                      } else {
-                        if (FocusScope.of(context).hasFocus) {
-                          FocusScope.of(context).unfocus();
-                        }
-                        setState(() {
-                          searchController.text = '';
-                          searchPersonList.clear();
-                          searchBusinessList.clear();
-                        });
-                      }
-                    } else {
-                      Navigator.of(context).pop();
-                    }
-                  },
-                  icon: Icon(
-                    searchPersonList.isEmpty
-                        ? Icons.search
-                        : Icons.arrow_back_ios_new_rounded,
-                    color: isDark ? Colors.white : Colors.black87,
-                  ),
-                ),
-                suffixIcon: searchController.text.isEmpty
-                    ? const SizedBox()
-                    : IconButton(
-                        padding: EdgeInsets.zero,
-                        onPressed: () {
-                          setState(() {
-                            searchPersonList.clear();
-                            searchController.text = '';
-                          });
-                        },
-                        icon: Icon(
-                          Icons.clear,
-                          color: isDark ? Colors.white : Colors.black,
-                        ),
-                      ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30),
-                  borderSide: BorderSide(
-                    width: 1,
-                    color: isDark ? Colors.white12 : Colors.grey,
-                  ),
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30),
-                  borderSide: BorderSide(
-                    width: 1,
-                    color: isDark ? Colors.white : Colors.grey,
-                  ),
-                ),
+                fit: BoxFit.cover,
+                isAntiAlias: true,
               ),
             ),
-          ),
-        ),
-        actions: [
-          GestureDetector(
-            onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => ProfileScreen(
-                    asset: assets,
-                  ),
-                ),
-              );
-            },
-            child: Padding(
-              padding: const EdgeInsets.only(right: 25),
-              child: ClipOval(
-                child: Image.asset(
-                  assets,
-                  fit: BoxFit.cover,
-                  height: 50,
-                  width: 50,
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-      body: searchPersonList.isNotEmpty || searchBusinessList.isNotEmpty
-          ?
-          // Flexible(child: ListView.builder(itemBuilder: (context, index) {
-          //     return SearchResultWidget(
-          //         name: searchList[index].name, image: searchList[index].asset);
-          //   }))
-
-          Wrap(
+            child: Stack(
               children: [
-                for (int i = 0; i < searchPersonList.length; i++)
-                  PeopleWidget(
-                    name: searchPersonList[i].name,
-                    getInitial: getInitials(searchPersonList[i].name),
-                    color: searchPersonList[i].bg,
-                  ),
-                for (int i = 0; i < searchBusinessList.length; i++)
-                  SingleBusinessWidget(
-                    businessesModel: searchBusinessList[i],
-                    onTap: () {},
-                    onLongPress: () {},
-                  ),
-              ],
-            )
-          : ListView(
-              padding: const EdgeInsets.symmetric(horizontal: 3),
-              scrollDirection: Axis.vertical,
-              children: <Widget>[
-                // Container(
-                //   height: size.height * 0.1,
-                //   width: size.width,
-                //   alignment: Alignment.center,
-                //   margin: const EdgeInsets.symmetric(
-                //     vertical: 8,
-                //   ),
-                //   decoration: BoxDecoration(
-                //     color: isDark ? Colors.black : Colors.white38,
-                //     image: const DecorationImage(
-                //       image: NetworkImage(
-                //         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVOIYQrX9h0FA7v7Kl1F-7UujQcl-ZElDoNg&usqp=CAU",
-                //       ),
-                //       fit: BoxFit.cover,
-                //       isAntiAlias: true,
-                //     ),
-                //   ),
-                //   child: ListTile(
-                //     titleAlignment: ListTileTitleAlignment.center,
-                //     title: SizedBox(
-                //       height: 50,
-                //       child: TextFormField(
-                //         controller: searchController,
-                //         textAlign: TextAlign.start,
-                //         style: TextStyle(
-                //           color: isDark ? Colors.white : Colors.black,
-                //         ),
-                //         onChanged: searchPerson,
-                //         decoration: InputDecoration(
-                //           fillColor: isDark ? Colors.black : Colors.white,
-                //           filled: true,
-                //           hintText: 'Pay friends and merchants',
-                //           hintStyle: TextStyle(
-                //             color: isDark ? Colors.white : Colors.black,
-                //           ),
-                //           prefixIcon: Icon(
-                //             Icons.search,
-                //             color: isDark ? Colors.white : Colors.black,
-                //           ),
-                //           suffixIcon: searchController.text.isEmpty
-                //               ? const SizedBox()
-                //               : IconButton(
-                //                   onPressed: () {
-                //                     if (searchController.text.isEmpty) {
-                //                       return;
-                //                     } else {
-                //                       setState(() {
-                //                         searchPersonList.clear();
-                //                         searchController.text = '';
-                //                       });
-                //                     }
-                //                   },
-                //                   icon: Icon(
-                //                     Icons.clear,
-                //                     color: isDark ? Colors.white : Colors.black,
-                //                   ),
-                //                 ),
-                //           border: OutlineInputBorder(
-                //             borderRadius: BorderRadius.circular(30),
-                //             borderSide: BorderSide(
-                //               width: 1,
-                //               color: isDark ? Colors.black : Colors.grey,
-                //             ),
-                //           ),
-                //         ),
-                //       ),
-                //     ),
-                //     trailing: GestureDetector(
-                //       onTap: () {
-                //         Navigator.of(context).push(
-                //           MaterialPageRoute(
-                //             builder: (context) => ProfileScreen(
-                //               asset: assets,
-                //             ),
-                //           ),
-                //         );
-                //       },
-                //       child: ClipOval(
-                //         child: Image.asset(
-                //           assets,
-                //           fit: BoxFit.cover,
-                //           height: 50,
-                //           width: 50,
-                //         ),
-                //       ),
-                //     ),
-                //   ),
-                // ),
-                Container(
-                  height: size.height * 0.25,
-                  padding: const EdgeInsets.only(
-                    top: 10,
-                  ),
-                  width: size.width,
-                  // clipBehavior: Clip.antiAlias,
-                  // decoration: BoxDecoration(
-                  // border: Border.all(
-                  //   color: Colors.black,
-                  //   width: 1,
-                  // ),
-                  //   color: Colors.white,
-                  //   borderRadius: BorderRadius.only(
-                  //     topLeft: Radius.circular(20),
-                  //     topRight: Radius.circular(20),
-                  //   ),
-                  // ),
-                  child: Wrap(
-                    alignment: WrapAlignment.center,
-                    runAlignment: WrapAlignment.center,
-                    children: [
-                      GridWidget(
-                        icon: Icons.qr_code_scanner_rounded,
-                        text: 'Scan any\n QR Code',
-                        onTap: () {},
-                      ),
-                      GridWidget(
-                        icon: Icons.perm_contact_calendar_sharp,
-                        text: 'Pay\n Contacts',
-                        onTap: () {},
-                      ),
-                      GridWidget(
-                        icon: Icons.send_to_mobile_rounded,
-                        text: 'Pay phone\n number',
-                        onTap: () {},
-                      ),
-                      GridWidget(
-                        icon: Icons.card_travel_rounded,
-                        text: 'Bank\n transfer',
-                        onTap: () {},
-                      ),
-                      GridWidget(
-                        icon: Icons.settings_backup_restore_rounded,
-                        text: 'Pay UPI ID\n or number',
-                        onTap: () {},
-                      ),
-                      GridWidget(
-                        icon: Icons.person,
-                        text: 'Self\n transfer',
-                        onTap: () {},
-                      ),
-                      GridWidget(
-                        icon: Icons.electric_bolt_outlined,
-                        text: 'Pay\n bills',
-                        onTap: () {},
-                      ),
-                      GridWidget(
-                        icon: Icons.mobile_friendly_sharp,
-                        text: 'Mobile\n recharge',
-                        onTap: () {},
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  height: 60,
-                  alignment: Alignment.center,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      TextButton.icon(
-                        style: TextButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 3, horizontal: 10),
-                          backgroundColor: isDark
-                              ? const Color.fromARGB(255, 36, 36, 36)
-                              : const Color.fromARGB(255, 235, 235, 235),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                            side: BorderSide.none,
-                          ),
-                          // fixedSize: Size(size.width * 0.3, 30),
+                searchPersonList.isNotEmpty || searchBusinessList.isNotEmpty
+                    ? ColoredBox(
+                        color: isDark
+                            ? const Color.fromARGB(255, 24, 24, 24)
+                            : Colors.white,
+                        child: SizedBox(
+                          height: size.height * 0.1,
+                          width: double.maxFinite,
                         ),
-                        onPressed: () {},
-                        label: Icon(
-                          Icons.add_circle_outline,
+                      )
+                    : const SizedBox(),
+                ListTile(
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 14)
+                      .copyWith(left: 25),
+                  titleAlignment: ListTileTitleAlignment.center,
+                  title: SizedBox(
+                    height: 50,
+                    child: TextFormField(
+                      controller: searchController,
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                        color: isDark ? Colors.white : Colors.black,
+                      ),
+                      onChanged: search,
+                      decoration: InputDecoration(
+                        fillColor: isDark
+                            ? const Color.fromARGB(255, 69, 69, 69)
+                            : Colors.white,
+                        filled: true,
+                        hintText: 'Pay friends and merchants',
+                        hintStyle: TextStyle(
                           color: isDark ? Colors.white : Colors.black,
-                          size: 22,
                         ),
-                        icon: Text(
-                          'Activate UPI Lite',
-                          style: TextStyle(
-                            fontSize: 10,
-                            color: isDark ? Colors.white : Colors.black,
+                        prefixIcon: IconButton(
+                          onPressed: () {
+                            if (searchPersonList.isNotEmpty ||
+                                searchBusinessList.isNotEmpty) {
+                              clearAll();
+                              searchController.text = '';
+                              if (FocusScope.of(context).hasFocus) {
+                                FocusScope.of(context).unfocus();
+                              }
+                            }
+                            //  else {
+                            //   Navigator.of(context).pop();
+                            // }
+                          },
+                          icon: Icon(
+                            searchPersonList.isEmpty
+                                ? Icons.search
+                                : Icons.arrow_back_ios_new_rounded,
+                            color: isDark ? Colors.white : Colors.black87,
                           ),
                         ),
-                      ),
-                      TextButton.icon(
-                        style: TextButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 3, horizontal: 10),
-                          backgroundColor: isDark
-                              ? const Color.fromARGB(255, 59, 59, 59)
-                              : Colors.white,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                            side: BorderSide(
-                              color: isDark ? Colors.white38 : Colors.grey,
-                            ),
-                          ),
-                          // fixedSize: Size(size.width * 0.45, 30),
-                        ),
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.copy,
+                        suffixIcon:
+                            // searchController.text.isEmpty
+                            //     ? const SizedBox()
+                            //     :
+                            IconButton(
+                          padding: EdgeInsets.zero,
+                          onPressed: () {
+                            if (searchPersonList.isNotEmpty ||
+                                searchBusinessList.isNotEmpty ||
+                                searchController.text.isNotEmpty) {
+                              clearAll();
+                              setState(() {
+                                searchController.text = '';
+                              });
+                              if (FocusScope.of(context).hasFocus) {
+                                FocusScope.of(context).unfocus();
+                              }
+                            } else {
+                              if (FocusScope.of(context).hasFocus) {
+                                FocusScope.of(context).unfocus();
+                              }
+                              return;
+                            }
+                          },
+                          icon: searchController.text.isEmpty
+                              ? const SizedBox()
+                              : const Icon(Icons.clear),
                           color: isDark ? Colors.white : Colors.black,
-                          size: 20,
                         ),
-                        label: Text(
-                          'UPI ID : $upiID ',
-                          style: TextStyle(
-                            color: isDark ? Colors.white : Colors.black,
-                            fontSize: 11,
+
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                          borderSide: BorderSide(
+                            width: 1,
+                            color: isDark ? Colors.white12 : Colors.grey,
                           ),
                         ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                          borderSide: BorderSide(
+                            width: 1,
+                            color: isDark ? Colors.white : Colors.grey,
+                          ),
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                          borderSide: BorderSide(
+                            width: 1,
+                            color: isDark ? Colors.white : Colors.grey,
+                          ),
+                        ),
+                        // fillColor: isDark ? Colors.black : Colors.white,
+                        // filled: true,
+                        // hintText: 'Pay friends and merchants',
+                        // hintStyle: TextStyle(
+                        //   color: isDark ? Colors.white : Colors.black,
+                        // ),
+                        // prefixIcon: Icon(
+                        //   Icons.search,
+                        //   color: isDark ? Colors.white : Colors.black,
+                        // ),
+                        // suffixIcon: searchController.text.isEmpty
+                        //     ? const SizedBox()
+                        //     : IconButton(
+                        //         onPressed: () {
+                        //           if (searchController.text.isEmpty) {
+                        //             return;
+                        //           } else {
+                        //             setState(() {
+                        //               searchPersonList.clear();
+                        //               searchController.text = '';
+                        //             });
+                        //           }
+                        //         },
+                        //         icon: Icon(
+                        //           Icons.clear,
+                        //           color: isDark ? Colors.white : Colors.black,
+                        //         ),
+                        //       ),
+                        // border: OutlineInputBorder(
+                        //   borderRadius: BorderRadius.circular(30),
+                        //   borderSide: BorderSide(
+                        //     width: 1,
+                        //     color: isDark ? Colors.black : Colors.grey,
+                        //   ),
+                        // ),
                       ),
-                    ],
+                    ),
                   ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 14.0, vertical: 9),
-                  child: Text(
-                    'People',
-                    style: TextStyle(
-                      color: isDark
-                          ? Colors.white
-                          : const Color.fromARGB(255, 44, 43, 43),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
+                  trailing: GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => ProfileScreen(
+                            asset: assets,
+                          ),
+                        ),
+                      );
+                    },
+                    child: ClipOval(
+                      child: Image.asset(
+                        assets,
+                        fit: BoxFit.cover,
+                        height: 50,
+                        width: 50,
+                      ),
                     ),
                   ),
                 ),
-                person.isEmpty
-                    ? ListTile(
-                        contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 5, vertical: 16),
-                        leading: Image.asset('assets/bg.png'),
-                        title: Text(
-                          'People you\'ve recently paid will show up here ',
+              ],
+            ),
+          ),
+          searchPersonList.isNotEmpty || searchBusinessList.isNotEmpty
+              ?
+              // Flexible(child: ListView.builder(itemBuilder: (context, index) {
+              //     return SearchResultWidget(
+              //         name: searchList[index].name, image: searchList[index].asset);
+              //   }))
+
+              Wrap(
+                  children: [
+                    for (int i = 0; i < searchPersonList.length; i++)
+                      PeopleWidget(
+                        name: searchPersonList[i].name,
+                        getInitial: getInitials(searchPersonList[i].name),
+                        color: searchPersonList[i].bg,
+                      ),
+                    for (int i = 0; i < searchBusinessList.length; i++)
+                      SingleBusinessWidget(
+                        businessesModel: searchBusinessList[i],
+                        onTap: () {},
+                        onLongPress: () {},
+                      ),
+                  ],
+                )
+              : Column(
+                  // scrollDirection: Axis.vertical,
+                  children: <Widget>[
+                    // Stack(
+                    //   children: [
+                    //     Image.asset(
+                    //       'assets/event.png',
+                    //       fit: BoxFit.cover,
+                    //       height: size.height * 0.22,
+                    //       width: double.maxFinite,
+                    //     ),
+                    //     Container(
+                    //       decoration: BoxDecoration(
+                    //         gradient: LinearGradient(
+                    //           colors: [
+                    //             isDark
+                    //                 ? const Color.fromARGB(150, 0, 0, 0)
+                    //                 : const Color.fromARGB(150, 255, 255, 255),
+                    //             isDark
+                    //                 ? const Color.fromARGB(16, 0, 0, 0)
+                    //                 : Colors.white10,
+                    //           ],
+                    //           begin: Alignment.topCenter,
+                    //           end: Alignment.bottomCenter,
+                    //         ),
+                    //       ),
+                    //       height: size.height * 0.22,
+                    //       width: double.maxFinite,
+                    //       child: const SizedBox.expand(),
+                    //     ),
+                    //   ],
+                    // ),
+                    Container(
+                      height: size.height * 0.25,
+                      padding: const EdgeInsets.only(
+                        top: 10,
+                      ),
+                      width: size.width,
+                      // clipBehavior: Clip.antiAlias,
+                      // decoration: BoxDecoration(
+                      // border: Border.all(
+                      //   color: Colors.black,
+                      //   width: 1,
+                      // ),
+                      //   color: Colors.white,
+                      //   borderRadius: BorderRadius.only(
+                      //     topLeft: Radius.circular(20),
+                      //     topRight: Radius.circular(20),
+                      //   ),
+                      // ),
+                      child: Wrap(
+                        alignment: WrapAlignment.center,
+                        runAlignment: WrapAlignment.center,
+                        children: [
+                          GridWidget(
+                            icon: Icons.qr_code_scanner_rounded,
+                            text: 'Scan any\n QR Code',
+                            onTap: () {},
+                          ),
+                          GridWidget(
+                            icon: Icons.perm_contact_calendar_sharp,
+                            text: 'Pay\n Contacts',
+                            onTap: () {},
+                          ),
+                          GridWidget(
+                            icon: Icons.send_to_mobile_rounded,
+                            text: 'Pay phone\n number',
+                            onTap: () {},
+                          ),
+                          GridWidget(
+                            icon: Icons.card_travel_rounded,
+                            text: 'Bank\n transfer',
+                            onTap: () {},
+                          ),
+                          GridWidget(
+                            icon: Icons.settings_backup_restore_rounded,
+                            text: 'Pay UPI ID\n or number',
+                            onTap: () {},
+                          ),
+                          GridWidget(
+                            icon: Icons.person,
+                            text: 'Self\n transfer',
+                            onTap: () {},
+                          ),
+                          GridWidget(
+                            icon: Icons.electric_bolt_outlined,
+                            text: 'Pay\n bills',
+                            onTap: () {},
+                          ),
+                          GridWidget(
+                            icon: Icons.mobile_friendly_sharp,
+                            text: 'Mobile\n recharge',
+                            onTap: () {},
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      height: 60,
+                      alignment: Alignment.center,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          TextButton.icon(
+                            style: TextButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 3, horizontal: 10),
+                              backgroundColor: isDark
+                                  ? const Color.fromARGB(255, 36, 36, 36)
+                                  : const Color.fromARGB(255, 235, 235, 235),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                side: BorderSide.none,
+                              ),
+                              // fixedSize: Size(size.width * 0.3, 30),
+                            ),
+                            onPressed: () {},
+                            label: Icon(
+                              Icons.add_circle_outline,
+                              color: isDark ? Colors.white : Colors.black,
+                              size: 22,
+                            ),
+                            icon: Text(
+                              'Activate UPI Lite',
+                              style: TextStyle(
+                                fontSize: 10,
+                                color: isDark ? Colors.white : Colors.black,
+                              ),
+                            ),
+                          ),
+                          TextButton.icon(
+                            style: TextButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 3, horizontal: 10),
+                              backgroundColor: isDark
+                                  ? const Color.fromARGB(255, 59, 59, 59)
+                                  : Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                side: BorderSide(
+                                  color: isDark ? Colors.white38 : Colors.grey,
+                                ),
+                              ),
+                              // fixedSize: Size(size.width * 0.45, 30),
+                            ),
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.copy,
+                              color: isDark ? Colors.white : Colors.black,
+                              size: 20,
+                            ),
+                            label: Text(
+                              'UPI ID : $upiID ',
+                              style: TextStyle(
+                                color: isDark ? Colors.white : Colors.black,
+                                fontSize: 11,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 14.0, vertical: 9),
+                        child: Text(
+                          'People',
                           style: TextStyle(
-                            color: isDark ? Colors.white : Colors.black87,
+                            color: isDark
+                                ? Colors.white
+                                : const Color.fromARGB(255, 44, 43, 43),
                             fontWeight: FontWeight.bold,
+                            fontSize: 18,
                           ),
                         ),
-                      )
-                    : SizedBox(
-                        child: Center(
-                          child: Wrap(
+                      ),
+                    ),
+                    person.isEmpty
+                        ? ListTile(
+                            contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 5, vertical: 16),
+                            leading: Image.asset('assets/bg.png'),
+                            title: Text(
+                              'People you\'ve recently paid will show up here ',
+                              style: TextStyle(
+                                color: isDark ? Colors.white : Colors.black87,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          )
+                        : SizedBox(
+                            child: Center(
+                              child: Wrap(
+                                children: [
+                                  for (int i = 0; i < person.length; i++)
+                                    GestureDetector(
+                                      onLongPress: () {
+                                        showDialog(
+                                            context: context,
+                                            builder: (context) {
+                                              return Dialog(
+                                                alignment: Alignment.center,
+                                                child: TextButton(
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      person.removeAt(i);
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    });
+                                                  },
+                                                  child: const Text(
+                                                    'remove',
+                                                  ),
+                                                ),
+                                              );
+                                            });
+                                      },
+                                      child: PeopleWidget(
+                                        name: person[i].name,
+                                        getInitial: getInitials(person[i].name),
+                                        color: person[i].bg,
+                                      ),
+                                    ),
+                                ],
+                              ),
+                            ),
+                          ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 12),
+                      child: Row(
+                        children: [
+                          Text(
+                            'Businessess',
+                            style: TextStyle(
+                              color: isDark ? Colors.white : Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                          ),
+                          const Spacer(),
+                          TextButton.icon(
+                            style: TextButton.styleFrom(
+                              backgroundColor:
+                                  const Color.fromARGB(255, 170, 213, 249),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                            ),
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.explore,
+                              color: Colors.blue.shade900,
+                            ),
+                            label: const Text(
+                              'Explore',
+                              style: TextStyle(
+                                color: Color.fromARGB(255, 10, 2, 240),
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: size.height * 0.135,
+                      width: size.width,
+                      child: ListView.builder(
+                        padding: const EdgeInsets.symmetric(horizontal: 3),
+                        itemCount: businesses.length,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: ((context, index) {
+                          final image = businesses[index].businessAsset;
+                          final name = businesses[index].businessName;
+                          return SingleBusinessWidget(
+                            businessesModel: BusinessesModel(
+                              businessName: name,
+                              businessAsset: image,
+                            ),
+                            onTap: () {},
+                            onLongPress: () {},
+                          );
+                        }),
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Text(
+                          "Bill & Recharges",
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: isDark ? Colors.white : Colors.black87,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                      ),
+                      child: InkWell(
+                        borderRadius: BorderRadius.circular(10),
+                        splashColor: Colors.purple,
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (_) => const Scaffold(
+                                body: SizedBox(
+                                  height: double.maxFinite,
+                                  width: double.maxFinite,
+                                  child: Icon(Icons.facebook),
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                        child: Ink(
+                          height: 100,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: isDark
+                                ? const Color.fromARGB(255, 48, 47, 47)
+                                : const Color.fromARGB(255, 235, 234, 234),
+                          ),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 15, vertical: 3),
+                          child: Row(
                             children: [
-                              for (int i = 0; i < person.length; i++)
-                                GestureDetector(
-                                  onLongPress: () {
-                                    showDialog(
-                                        context: context,
-                                        builder: (context) {
-                                          return Dialog(
-                                            alignment: Alignment.center,
-                                            child: TextButton(
-                                              onPressed: () {
-                                                setState(() {
-                                                  person.removeAt(i);
-                                                  Navigator.of(context).pop();
-                                                });
-                                              },
-                                              child: const Text(
-                                                'remove',
-                                              ),
-                                            ),
-                                          );
-                                        });
-                                  },
-                                  child: PeopleWidget(
-                                    name: person[i].name,
-                                    getInitial: getInitials(person[i].name),
-                                    color: person[i].bg,
+                              ClipOval(
+                                child: Image.asset(
+                                  'assets/maha.png',
+                                  isAntiAlias: true,
+                                  width: 60,
+                                  height: 60,
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 7,
+                              ),
+                              Expanded(
+                                child: Text(
+                                  'Mahavitaran - \nMaharashtra Electricity',
+                                  style: TextStyle(
+                                    color: isDark ? Colors.white : Colors.black,
+                                    fontSize: 16,
                                   ),
                                 ),
+                              ),
+                              Icon(
+                                Icons.arrow_forward_ios_rounded,
+                                color: isDark ? Colors.white : Colors.black,
+                              ),
                             ],
                           ),
                         ),
                       ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
-                  child: Row(
-                    children: [
-                      Text(
-                        'Businessess',
-                        style: TextStyle(
-                          color: isDark ? Colors.white : Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                        ),
-                      ),
-                      const Spacer(),
-                      TextButton.icon(
-                        style: TextButton.styleFrom(
-                          backgroundColor:
-                              const Color.fromARGB(255, 170, 213, 249),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                        ),
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.explore,
-                          color: Colors.blue.shade900,
-                        ),
-                        label: const Text(
-                          'Explore',
-                          style: TextStyle(
-                            color: Color.fromARGB(255, 10, 2, 240),
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: size.height * 0.135,
-                  width: size.width,
-                  child: ListView.builder(
-                    itemCount: businesses.length,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: ((context, index) {
-                      final image = businesses[index].businessAsset;
-                      final name = businesses[index].businessName;
-                      return SingleBusinessWidget(
-                        businessesModel: BusinessesModel(
-                          businessName: name,
-                          businessAsset: image,
-                        ),
-                        onTap: () {},
-                        onLongPress: () {},
-                      );
-                    }),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Text(
-                    "Bill & Recharges",
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: isDark ? Colors.white : Colors.black87,
                     ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                  ),
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(10),
-                    splashColor: Colors.purple,
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (_) => const Scaffold(
-                            body: SizedBox(
-                              height: double.maxFinite,
-                              width: double.maxFinite,
-                              child: Icon(Icons.facebook),
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                    child: Ink(
-                      height: 100,
+                    Container(
+                      alignment: Alignment.center,
+                      height: size.height * 0.36,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 10,
+                      ),
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 18, vertical: 15),
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(16),
                         color: isDark
                             ? const Color.fromARGB(255, 48, 47, 47)
                             : const Color.fromARGB(255, 235, 234, 234),
                       ),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 15, vertical: 3),
-                      child: Row(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          ClipOval(
-                            child: Image.asset(
-                              'assets/maha.png',
-                              isAntiAlias: true,
-                              width: 60,
-                              height: 60,
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          Text(
+                            'ALSO TRY ADDING',
+                            style: TextStyle(
+                              color: isDark ? Colors.white : Colors.black,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                           const SizedBox(
-                            width: 7,
+                            height: 5,
                           ),
-                          Expanded(
-                            child: Text(
-                              'Mahavitaran - \nMaharashtra Electricity',
-                              style: TextStyle(
-                                color: isDark ? Colors.white : Colors.black,
-                                fontSize: 16,
+                          Wrap(
+                            alignment: WrapAlignment.start,
+                            children: [
+                              Mid(
+                                icon: Icons.phone_android_rounded,
+                                text: 'Postpaid mobile',
                               ),
-                            ),
-                          ),
-                          Icon(
-                            Icons.arrow_forward_ios_rounded,
-                            color: isDark ? Colors.white : Colors.black,
+                              Mid(
+                                icon: Icons.wifi_password_rounded,
+                                text: 'Broadband /\nLandline',
+                              ),
+                              Mid(
+                                icon: Icons.gas_meter_outlined,
+                                text: 'Piped gas',
+                              ),
+                            ],
                           ),
                         ],
                       ),
                     ),
-                  ),
-                ),
-                Container(
-                  height: size.height * 0.36,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 10,
-                  ),
-                  margin: const EdgeInsets.all(
-                    15,
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    color: isDark
-                        ? const Color.fromARGB(255, 48, 47, 47)
-                        : const Color.fromARGB(255, 235, 234, 234),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      Text(
-                        'ALSO TRY ADDING',
+                    FilterChip(
+                      onSelected: (value) {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const BillsScreen(),
+                          ),
+                        );
+                      },
+                      backgroundColor: isDark
+                          ? const Color.fromARGB(255, 48, 47, 47)
+                          : Colors.blue.shade100,
+                      label: Text(
+                        'see all',
                         style: TextStyle(
                           color: isDark ? Colors.white : Colors.black,
-                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const SizedBox(
-                        height: 5,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(
+                          24,
+                        ),
+                        side: BorderSide(
+                          width: 1,
+                          color: Colors.blueAccent.shade200,
+                        ),
                       ),
-                      Wrap(
-                        alignment: WrapAlignment.start,
-                        children: [
-                          Mid(
-                            icon: Icons.phone_android_rounded,
-                            text: 'Postpaid mobile',
-                          ),
-                          Mid(
-                            icon: Icons.wifi_password_rounded,
-                            text: 'Broadband /\nLandline',
-                          ),
-                          Mid(
-                            icon: Icons.gas_meter_outlined,
-                            text: 'Piped gas',
-                          ),
-                        ],
+                    ),
+                    Container(
+                      margin: const EdgeInsets.symmetric(
+                        horizontal: 17,
+                        vertical: 9,
                       ),
-                    ],
-                  ),
-                ),
-                FilterChip(
-                  onSelected: (value) {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const BillsScreen(),
+                      clipBehavior: Clip.antiAlias,
+                      decoration: BoxDecoration(
+                        color: isDark
+                            ? const Color.fromARGB(255, 48, 47, 47)
+                            : const Color.fromARGB(255, 235, 234, 234),
+                        borderRadius: BorderRadius.circular(16),
                       ),
-                    );
-                  },
-                  backgroundColor: isDark
-                      ? const Color.fromARGB(255, 48, 47, 47)
-                      : Colors.blue.shade100,
-                  label: Text(
-                    'see all',
-                    style: TextStyle(
-                      color: isDark ? Colors.white : Colors.black,
-                    ),
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(
-                      24,
-                    ),
-                    side: BorderSide(
-                      width: 1,
-                      color: Colors.blueAccent.shade200,
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.symmetric(
-                    horizontal: 15,
-                    vertical: 9,
-                  ),
-                  clipBehavior: Clip.antiAlias,
-                  decoration: BoxDecoration(
-                    color: isDark
-                        ? const Color.fromARGB(255, 48, 47, 47)
-                        : const Color.fromARGB(255, 235, 234, 234),
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: ExpansionTile(
-                    collapsedTextColor: expTileColor,
-                    textColor: expTileColor,
-                    collapsedIconColor: expTileColor,
-                    // collapsedTextColor: isDark ? Colors.white : Colors.black,
-                    // textColor: isDark ? Colors.white : Colors.black,
-                    // collapsedIconColor: isDark ? Colors.white : Colors.black,
-                    tilePadding: const EdgeInsets.symmetric(
-                      horizontal: 5,
-                      vertical: 5,
-                    ),
-                    childrenPadding: const EdgeInsets.symmetric(
-                      horizontal: 3,
-                      vertical: 5,
-                    ),
-                    // backgroundColor: isDark
-                    //     ? const Color.fromARGB(255, 48, 47, 47)
-                    //     : const Color.fromARGB(255, 235, 234, 234),
-                    // collapsedBackgroundColor: isDark
-                    //     ? const Color.fromARGB(255, 48, 47, 47)
-                    //     : const Color.fromARGB(255, 235, 234, 234),
-                    onExpansionChanged: (value) {
-                      setState(() {
-                        panel = value;
-                      });
-                    },
-                    trailing: Icon(
-                      size: 50,
-                      panel
-                          ? Icons.arrow_drop_up_rounded
-                          : Icons.arrow_drop_down_rounded,
-                      color: isDark ? Colors.white : Colors.black,
-                    ),
-                    title: Row(
-                      children: [
-                        DropWidget(image: 'assets/jio.png', text: 'Jio'),
-                        DropWidget(image: 'assets/redbus.png', text: 'Redbus'),
-                        DropWidget(image: 'assets/5paisa.png', text: '5Paisa'),
-                      ],
-                    ),
-                    children: [
-                      Column(
-                        children: [
-                          SizedBox(
-                            height: size.height * 0.14,
-                            child: Row(
-                              children: [
-                                DropWidget(
-                                    image: 'assets/maha.png',
-                                    text: 'Mahavitran'),
-                                DropWidget(
-                                    image: 'assets/mv.png', text: 'Movie view'),
-                                DropWidget(
-                                    image: 'assets/5paisa.png', text: '5Paisa'),
-                                DropWidget(
-                                    image: 'assets/jio.png', text: 'Jio'),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: size.height * 0.14,
-                            child: Row(
-                              children: [
-                                DropWidget(
-                                    image: 'assets/redbus.png', text: 'Redbus'),
-                                DropWidget(
-                                    image: 'assets/5paisa.png', text: '5Paisa'),
-                                DropWidget(
-                                    image: 'assets/jio.png', text: 'Jio'),
-                                DropWidget(
-                                    image: 'assets/redbus.png', text: 'Redbus')
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
+                      child: ExpansionTile(
+                        collapsedTextColor: expTileColor,
+                        textColor: expTileColor,
+                        collapsedIconColor: expTileColor,
+                        // collapsedTextColor: isDark ? Colors.white : Colors.black,
+                        // textColor: isDark ? Colors.white : Colors.black,
+                        // collapsedIconColor: isDark ? Colors.white : Colors.black,
+                        tilePadding: const EdgeInsets.symmetric(
+                          horizontal: 5,
+                          vertical: 5,
+                        ),
+                        childrenPadding: const EdgeInsets.symmetric(
                           horizontal: 3,
                           vertical: 5,
                         ),
-                        child: Text(
-                          'Promotions',
-                          style: TextStyle(
-                            color: isDark ? Colors.white : Colors.black,
-                            fontSize: 22,
-                            fontWeight: FontWeight.w400,
-                          ),
+                        // backgroundColor: isDark
+                        //     ? const Color.fromARGB(255, 48, 47, 47)
+                        //     : const Color.fromARGB(255, 235, 234, 234),
+                        // collapsedBackgroundColor: isDark
+                        //     ? const Color.fromARGB(255, 48, 47, 47)
+                        //     : const Color.fromARGB(255, 235, 234, 234),
+                        onExpansionChanged: (value) {
+                          setState(() {
+                            panel = value;
+                          });
+                        },
+                        trailing: Icon(
+                          size: 50,
+                          panel
+                              ? Icons.arrow_drop_up_rounded
+                              : Icons.arrow_drop_down_rounded,
+                          color: isDark ? Colors.white : Colors.black,
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 6)
-                            .copyWith(top: 7),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        title: Row(
                           children: [
+                            DropWidget(image: 'assets/jio.png', text: 'Jio'),
                             DropWidget(
-                              image: 'assets/rewards.png',
-                              text: 'Rewards',
-                              onTap: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (_) => const RewardsScreen(),
-                                  ),
-                                );
-                              },
-                            ),
+                                image: 'assets/redbus.png', text: 'Redbus'),
                             DropWidget(
-                              image: 'assets/offers.png',
-                              text: 'Offers',
-                              onTap: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) => const OffersScreen(),
-                                  ),
-                                );
-                              },
-                            ),
-                            DropWidget(
-                              image: 'assets/invite.png',
-                              text: 'Invite Friends',
-                              onTap: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (_) => const ReferrelsScreen()));
-                              },
-                            ),
-                            DropWidget(
-                              image: 'assets/ihome.png',
-                              text: 'Indi-home',
-                            ),
+                                image: 'assets/5paisa.png', text: '5Paisa'),
                           ],
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 4, vertical: 8),
-                        child: Text(
-                          'Manage your money',
-                          style: TextStyle(
-                            color: isDark ? Colors.white : Colors.black,
-                            fontSize: 22,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                      ),
-                      Wrap(
                         children: [
-                          GChip(
-                            text: 'Loans',
-                            icon: Icons.local_activity,
-                            onTap: () {},
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          GChip(
-                            text: 'Gold',
-                            icon: Icons.flourescent_rounded,
-                            onTap: () {},
+                          Column(
+                            children: [
+                              SizedBox(
+                                height: size.height * 0.14,
+                                child: Row(
+                                  children: [
+                                    DropWidget(
+                                        image: 'assets/maha.png',
+                                        text: 'Mahavitran'),
+                                    DropWidget(
+                                        image: 'assets/mv.png',
+                                        text: 'Movie view'),
+                                    DropWidget(
+                                        image: 'assets/5paisa.png',
+                                        text: '5Paisa'),
+                                    DropWidget(
+                                        image: 'assets/jio.png', text: 'Jio'),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                height: size.height * 0.14,
+                                child: Row(
+                                  children: [
+                                    DropWidget(
+                                        image: 'assets/redbus.png',
+                                        text: 'Redbus'),
+                                    DropWidget(
+                                        image: 'assets/5paisa.png',
+                                        text: '5Paisa'),
+                                    DropWidget(
+                                        image: 'assets/jio.png', text: 'Jio'),
+                                    DropWidget(
+                                        image: 'assets/redbus.png',
+                                        text: 'Redbus')
+                                  ],
+                                ),
+                              )
+                            ],
                           ),
                         ],
                       ),
-                      ListTile(
-                        onTap: () {},
-                        leading: const Icon(
-                          Icons.speed,
-                          color: Colors.blue,
-                        ),
-                        title: Text(
-                          'Check your CIBIL score for \nfree',
-                          maxLines: 2,
-                          style: TextStyle(
-                            color: isDark ? Colors.white : Colors.black87,
-                            fontSize: 18,
-                          ),
-                        ),
-                        trailing: Icon(
-                          Icons.arrow_forward_ios_rounded,
-                          color: isDark ? Colors.white : Colors.black,
-                        ),
-                      ),
-                      ListTile(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  const TransactionHistoryScreen(),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 12),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 3,
+                              vertical: 5,
                             ),
-                          );
-                        },
-                        leading: const Icon(
-                          Icons.access_time_rounded,
-                          color: Colors.blue,
-                        ),
-                        title: Text(
-                          'Show transaction history',
-                          style: TextStyle(
-                            color: isDark ? Colors.white : Colors.black87,
-                            fontSize: 18,
-                          ),
-                        ),
-                        trailing: Icon(
-                          Icons.arrow_forward_ios_rounded,
-                          color: isDark ? Colors.white : Colors.black,
-                        ),
-                      ),
-                      ListTile(
-                        onTap: () {},
-                        leading: const Icon(
-                          Icons.house_siding_rounded,
-                          color: Colors.blue,
-                        ),
-                        title: Text(
-                          'Check bank balance',
-                          style: TextStyle(
-                            color: isDark ? Colors.white : Colors.black87,
-                            fontSize: 18,
-                          ),
-                        ),
-                        trailing: Icon(
-                          Icons.arrow_forward_ios_rounded,
-                          color: isDark ? Colors.white : Colors.black,
-                        ),
-                      ),
-                      Container(
-                        height: 170,
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 4,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(
-                            10,
-                          ),
-                          image: const DecorationImage(
-                            image: AssetImage('assets/backbottom.png'),
-                            fit: BoxFit.cover,
-                            opacity: 0.3,
-                          ),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Text(
-                              'Invite your friends to Google Pay',
+                            child: Text(
+                              'Offers & rewards',
                               style: TextStyle(
-                                fontSize: 21,
-                                fontWeight: FontWeight.w500,
                                 color: isDark ? Colors.white : Colors.black,
-                              ),
-                            ),
-                            Text(
-                              'invite your friends to Google Pay and get ₹101 when your friends their first payment. Thet get ₹21!',
-                              style: TextStyle(
-                                fontSize: 15,
+                                fontSize: 22,
                                 fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 3)
+                                .copyWith(top: 7),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                DropWidget(
+                                  image: 'assets/rewards.png',
+                                  text: 'Rewards',
+                                  onTap: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (_) => const RewardsScreen(),
+                                      ),
+                                    );
+                                  },
+                                ),
+                                DropWidget(
+                                  image: 'assets/offers.png',
+                                  text: 'Offers',
+                                  onTap: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const OffersScreen(),
+                                      ),
+                                    );
+                                  },
+                                ),
+                                DropWidget(
+                                  image: 'assets/invite.png',
+                                  text: 'Invite Friends',
+                                  onTap: () {
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (_) =>
+                                                const ReferrelsScreen()));
+                                  },
+                                ),
+                                DropWidget(
+                                  image: 'assets/ihome.png',
+                                  text: 'Indi-home',
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 4, vertical: 8),
+                            child: Text(
+                              'Manage your money',
+                              style: TextStyle(
+                                color: isDark ? Colors.white : Colors.black,
+                                fontSize: 22,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ),
+                          Wrap(
+                            children: [
+                              GChip(
+                                text: 'Loans',
+                                icon: Icons.local_activity,
+                                onTap: () {},
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              GChip(
+                                text: 'Gold',
+                                icon: Icons.flourescent_rounded,
+                                onTap: () {},
+                              ),
+                            ],
+                          ),
+                          ListTile(
+                            contentPadding:
+                                const EdgeInsets.symmetric(horizontal: 12),
+                            onTap: () {},
+                            leading: const Icon(
+                              Icons.speed,
+                              color: Colors.blue,
+                            ),
+                            title: Text(
+                              'Check your CIBIL score for \nfree',
+                              maxLines: 2,
+                              style: TextStyle(
+                                color: isDark ? Colors.white : Colors.black87,
+                                fontSize: 18,
+                              ),
+                            ),
+                            trailing: Icon(
+                              Icons.arrow_forward_ios_rounded,
+                              color: isDark ? Colors.white : Colors.black,
+                            ),
+                          ),
+                          ListTile(
+                            contentPadding:
+                                const EdgeInsets.symmetric(horizontal: 12),
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const TransactionHistoryScreen(),
+                                ),
+                              );
+                            },
+                            leading: const Icon(
+                              Icons.access_time_rounded,
+                              color: Colors.blue,
+                            ),
+                            title: Text(
+                              'Show transaction history',
+                              style: TextStyle(
+                                color: isDark ? Colors.white : Colors.black87,
+                                fontSize: 18,
+                              ),
+                            ),
+                            trailing: Icon(
+                              Icons.arrow_forward_ios_rounded,
+                              color: isDark ? Colors.white : Colors.black,
+                            ),
+                          ),
+                          ListTile(
+                            contentPadding:
+                                const EdgeInsets.symmetric(horizontal: 12),
+                            onTap: () {},
+                            leading: const Icon(
+                              Icons.house_siding_rounded,
+                              color: Colors.blue,
+                            ),
+                            title: Text(
+                              'Check bank balance',
+                              style: TextStyle(
+                                color: isDark ? Colors.white : Colors.black87,
+                                fontSize: 18,
+                              ),
+                            ),
+                            trailing: Icon(
+                              Icons.arrow_forward_ios_rounded,
+                              color: isDark ? Colors.white : Colors.black,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      height: 170,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 4,
+                      ),
+                      decoration: const BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage('assets/backbottom.png'),
+                          fit: BoxFit.cover,
+                          opacity: 0.55,
+                        ),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text(
+                            'Invite your friends to Google Pay',
+                            style: TextStyle(
+                              fontSize: 21,
+                              fontWeight: FontWeight.w500,
+                              color: isDark ? Colors.white : Colors.black,
+                            ),
+                          ),
+                          Text(
+                            'invite your friends to Google Pay and get ₹101 when your friends their first payment. Thet get ₹21!',
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w400,
+                              color: isDark ? Colors.white : Colors.black,
+                            ),
+                          ),
+                          ListTile(
+                            contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 3,
+                              vertical: 5,
+                            ),
+                            leading: Text(
+                              'Copy your code',
+                              style: TextStyle(
                                 color: isDark ? Colors.white : Colors.black,
                               ),
                             ),
-                            ListTile(
-                              contentPadding: const EdgeInsets.symmetric(
-                                horizontal: 3,
-                                vertical: 5,
-                              ),
-                              leading: Text(
-                                'Copy your code',
-                                style: TextStyle(
-                                  color: isDark ? Colors.white : Colors.black,
-                                ),
-                              ),
-                              title: Text(
-                                'ac8bx3e',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: isDark ? Colors.white : Colors.black,
-                                ),
-                              ),
-                              trailing: IconButton(
-                                onPressed: () {},
-                                icon: Icon(
-                                  Icons.copy,
-                                  color: isDark ? Colors.white : Colors.black,
-                                ),
+                            title: Text(
+                              'ac8bx3e',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: isDark ? Colors.white : Colors.black,
                               ),
                             ),
-                          ],
-                        ),
+                            trailing: IconButton(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.copy,
+                                color: isDark ? Colors.white : Colors.black,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+        ],
+      ),
     );
   }
 }

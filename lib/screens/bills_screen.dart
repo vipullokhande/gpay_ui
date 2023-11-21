@@ -177,6 +177,9 @@ class _BillsScreenState extends State<BillsScreen> {
                   updated.clear();
                   searchController.text = '';
                 });
+                if (FocusScope.of(context).hasFocus) {
+                  FocusScope.of(context).unfocus();
+                }
               }
             },
             icon: Icon(
